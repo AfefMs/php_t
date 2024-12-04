@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la Ressource{% endblock %}
+
+{% block body %}
+    <h1>Détails de la Ressource</h1>
+
+    <ul>
+        <li><strong>Type : </strong>{{ ressource.typeR }}</li>
+        <li><strong>Nom : </strong>{{ ressource.nomR }}</li>
+        <li><strong>Fichier : </strong>{{ ressource.fileR }}</li>
+    </ul>
+
+    <a href="{{ path('app_ressource_index') }}" class="btn btn-primary">Retour à la liste</a>
+{% endblock %}

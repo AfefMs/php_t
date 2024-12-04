@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Ressources{% endblock %}
+
+{% block body %}
+    <h1>Liste des Ressources</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Nom</th>
+                <th>Fichier</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ressource in ressources %}
+                <tr>
+                    <td>{{ ressource.typeR }}</td>
+                    <td>{{ ressource.nomR }}</td>
+                    <td>{{ ressource.fileR }}</td>
+                    <td>
+                        <a href="{{ path('app_ressource_show', {'id': ressource.id}) }}" class="btn btn-info">Voir</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Aucune ressource trouvée.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

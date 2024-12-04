@@ -1,0 +1,17 @@
+{# templates/ressource/new.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer une nouvelle ressource{% endblock %}
+
+{% block body %}
+<h1>Créer une nouvelle ressource</h1>
+
+{{ form_start(form) }}
+    {{ form_row(form.typeR) }}
+    {{ form_row(form.nomR) }}
+    {{ form_row(form.fileR) }}
+    <button type="submit">Créer</button>
+{{ form_end(form) }}
+
+<a href="{{ path('app_ressource_index') }}">Retour à la liste</a>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projet Index{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Projet Index</h1>
+
+    <!-- Recherche -->
+    <form method="get" action="{{ path('app_projet_index') }}" class="mb-4">
+        <div class="input-group">
+            <input type="text" class="form-control" name="search" value="{{ app.request.get('search') }}" placeholder="Search by name, description, etc." />
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+        </div>
+    </form>
+
+    <div class="card shadow-sm rounded-lg">
+        <div class="card-body">
+            <table class="table table-hover table-bordered text-center">
+                <thead class="thead-dark bg-primary text-white">
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>Statuts</th>
+                        <th>Date Début</th>
+                        <th>Date Fin</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for projet in projets %}
+                    <tr>
+                        <td>{{ projet.idP }}</td>
+                        <td>{{ projet.nomP }}</td>
+                        <td>{{ projet.descriptionP }}</td>
+                        <td>{{ projet.statuts }}</td>
+                        <td>{{ projet.dateDebut ? projet.dateDebut|date('Y-m-d H:i') : '' }}</td>
+                        <td>{{ projet.dateFin ? projet.dateFin|date('Y-m-d H:i') : '' }}</td>
+                        <td>
+                            <a href="{{ path('app_projet_show', {'id': projet.id}) }}" class="btn btn-info btn-sm mx-1">Voir</a>
+                            <a href="{{ path('app_projet_edit', {'id': projet.id}) }}" class="btn btn-warning btn-sm mx-1">Modifier</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7" class="text-center text-muted">Aucun projet trouvé</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="mt-4 text-center">
+        <a href="{{ path('app_projet_new') }}" class="btn btn-success btn-lg">Créer un nouveau projet</a>
+    </div>
+</div>
+{% endblock %}

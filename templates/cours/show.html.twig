@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du Cours{% endblock %}
+
+{% block body %}
+    <h1>Détails du Cours</h1>
+    <table>
+        <tr>
+            <th>Nom du Cours</th>
+            <td>{{ cours.nomC }}</td>
+        </tr>
+        <tr>
+            <th>Durée</th>
+            <td>{{ cours.dureeC }}</td>
+        </tr>
+        <tr>
+            <th>Période</th>
+            <td>{{ cours.periodeC }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ cours.descriptionC }}</td>
+        </tr>
+    </table>
+    <a href="{{ path('app_cours_edit', { 'id': cours.id }) }}">Modifier</a>
+    <form method="post" action="{{ path('app_cours_delete', { 'id': cours.id }) }}" style="display:inline;">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ cours.id) }}">
+        <button type="submit">Supprimer</button>
+    </form>
+    <br>
+    <a href="{{ path('app_cours_index') }}">Retour à la liste</a>
+{% endblock %}

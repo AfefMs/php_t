@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des tâches{% endblock %}
+
+{% block body %}
+    <h1>Liste des tâches</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Date de début</th>
+                <th>Date de fin</th>
+                <th>Statut</th>
+                <th>Projet</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tache in taches %}
+                <tr>
+                    <td>{{ tache.idT }}</td>
+                    <td>{{ tache.nomT }}</td>
+                    <td>{{ tache.descriptionT }}</td>
+                    <td>{{ tache.dateDebut|date('Y-m-d H:i') }}</td>
+                    <td>{{ tache.dateFin|date('Y-m-d H:i') }}</td>
+                    <td>{{ tache.statusT }}</td>
+                    <td>{{ tache.PrjetT }}</td>
+                    <td>
+                        <a href="{{ path('app_tache_show', {'id': tache.id}) }}">Voir</a>
+                        <a href="{{ path('app_tache_edit', {'id': tache.id}) }}">Modifier</a>
+                        <form method="post" action="{{ path('app_tache_delete', {'id': tache.id}) }}" style="display:inline-block;">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ tache.id) }}">
+                            <button type="submit">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_tache_new') }}">Créer une nouvelle tâche</a>
+{% endblock %}

@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        autowire: true      # Injecte automatiquement les dépendances dans vos services.
+        autoconfigure: true # Enregistre automatiquement vos services en tant que commandes, abonnés aux événements, etc.
+
+    # Déclare toutes les classes dans src/ comme des services.
+    App\:
+        resource: '../src/*'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
